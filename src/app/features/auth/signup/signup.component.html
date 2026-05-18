@@ -1,0 +1,43 @@
+<div class="auth-form">
+  <app-topic-badge label="Validators" />
+  <app-topic-badge label="localStorage" />
+  <h2>Create account</h2>
+
+  @if (error(); as msg) {
+    <div class="alert alert-error">{{ msg }}</div>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <label>
+      Full name
+      <input type="text" formControlName="name" placeholder="Jane Doe" />
+    </label>
+
+    <label>
+      Email
+      <input type="email" formControlName="email" />
+    </label>
+
+    <label>
+      Password
+      <input type="password" formControlName="password" />
+    </label>
+
+    <label>
+      Role
+      <select formControlName="role">
+        @for (r of roles; track r) {
+          <option [value]="r">{{ r }}</option>
+        }
+      </select>
+    </label>
+
+    <button type="submit" class="btn-primary" [disabled]="loading()">
+      {{ loading() ? 'Creating…' : 'Sign up' }}
+    </button>
+  </form>
+
+  <p class="footer-link">
+    Already have an account? <a routerLink="/auth/login">Sign in</a>
+  </p>
+</div>

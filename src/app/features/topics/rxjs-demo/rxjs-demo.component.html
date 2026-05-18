@@ -1,0 +1,33 @@
+<a routerLink="/topics" class="back">← Topics</a>
+
+<header class="page-header">
+  <h1>RxJS &amp; BehaviorSubject</h1>
+  <p>AuthService uses BehaviorSubject for session; this page shows operators + async pipe.</p>
+</header>
+
+<label class="search-label">
+  Filter users (debounceTime + distinctUntilChanged)
+  <input type="search" [formControl]="searchControl" placeholder="Type to filter…" />
+</label>
+
+<table class="data-table">
+  <thead>
+    <tr><th>Name</th><th>Email</th><th>Role</th></tr>
+  </thead>
+  <tbody>
+    @for (row of filteredUsers$ | async; track row.email) {
+      <tr>
+        <td>{{ row.name }}</td>
+        <td>{{ row.email }}</td>
+        <td>{{ row.role }}</td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<button type="button" class="btn" (click)="emitClick()">Emit on Subject</button>
+<p>Clicks via Subject + async pipe: {{ clickCount$ | async }}</p>
+
+<section class="hint">
+  <strong>Interview:</strong> BehaviorSubject = last value + multicast. Unsubscribe in ngOnDestroy or use takeUntilDestroyed / async pipe.
+</section>

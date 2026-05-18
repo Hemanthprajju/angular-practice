@@ -1,0 +1,39 @@
+<div class="auth-form">
+  <app-topic-badge label="Reactive Forms" />
+  <app-topic-badge label="RxJS subscribe" />
+  <h2>Sign in</h2>
+
+  @if (error(); as msg) {
+    <div class="alert alert-error">{{ msg }}</div>
+  }
+
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <label>
+      Email
+      <input type="email" formControlName="email" placeholder="Enter your email" />
+      @if (form.controls.email.touched && form.controls.email.errors?.['required']) {
+        <span class="field-error">Email is required</span>
+      }
+    </label>
+
+    <label>
+      Password
+      <input type="password" formControlName="password" placeholder="••••••••" />
+    </label>
+
+    <button type="submit" class="btn-primary" [disabled]="loading()">
+      {{ loading() ? 'Signing in…' : 'Sign in' }}
+    </button>
+  </form>
+
+  <p class="demo-row">
+    Quick fill:
+    <button type="button" class="btn-link" (click)="fillDemo('admin')">Admin</button>
+    <button type="button" class="btn-link" (click)="fillDemo('user')">User</button>
+    <button type="button" class="btn-link" (click)="fillDemo('mechanic')">Mechanic</button>
+  </p>
+
+  <p class="footer-link">
+    No account? <a routerLink="/auth/signup">Create one</a>
+  </p>
+</div>

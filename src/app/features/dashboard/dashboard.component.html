@@ -1,0 +1,55 @@
+<header class="page-header">
+  <div>
+    <app-topic-badge label="Signals" />
+    <app-topic-badge label="computed()" />
+    <app-topic-badge label="authGuard" />
+    <h1>Dashboard</h1>
+    <p>Welcome back, {{ user()?.name }} — role: <strong>{{ user()?.role }}</strong></p>
+  </div>
+</header>
+
+@if (roleDenied()) {
+  <div class="alert-warn">
+    Access denied: <strong>roleGuard</strong> blocked that route. Only admins can open Admin.
+  </div>
+}
+
+<div class="stats-grid">
+  <article class="stat-card">
+    <span class="stat-value">{{ stats().total }}</span>
+    <span class="stat-label">Total appointments</span>
+  </article>
+  <article class="stat-card accent">
+    <span class="stat-value">{{ stats().scheduled }}</span>
+    <span class="stat-label">Scheduled</span>
+  </article>
+  <article class="stat-card success">
+    <span class="stat-value">{{ stats().completed }}</span>
+    <span class="stat-label">Completed</span>
+  </article>
+</div>
+
+<section class="section">
+  <h2>Upcoming (signal-derived)</h2>
+  @if (upcoming().length === 0) {
+    <p class="empty">No upcoming appointments.</p>
+  } @else {
+    <ul class="mini-list">
+      @for (a of upcoming(); track a.id) {
+        <li>
+          <strong>{{ a.service }}</strong> — {{ a.vehicle }}
+          <span class="date">{{ a.date | date: 'medium' }}</span>
+        </li>
+      }
+    </ul>
+  }
+</section>
+
+<section class="section architecture">
+  <h2>Project architecture</h2>
+  <pre>src/app/
+├── core/          guards, interceptors, singleton services
+├── shared/        reusable UI, styles
+├── layout/        shell (sidebar), auth wrapper
+└── features/      auth, dashboard, appointments, topics</pre>
+</section>

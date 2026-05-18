@@ -1,0 +1,51 @@
+<a routerLink="/topics" class="back">← Topics</a>
+
+<header class="page-header">
+  <h1>Signals</h1>
+  <p>signal → writable state, computed → derived, effect → side effects</p>
+</header>
+
+<div class="cart">
+  <div class="row">
+    <span>Quantity</span>
+    <div class="qty-controls">
+      <button type="button" (click)="setQuantity(-1)">−</button>
+      <span>{{ quantity() }}</span>
+      <button type="button" (click)="setQuantity(1)">+</button>
+    </div>
+  </div>
+  <div class="row">
+    <span>Unit price</span>
+    <input
+      type="number"
+      [value]="unitPrice()"
+      (input)="unitPrice.set(+$any($event.target).value)"
+    />
+  </div>
+  <div class="row total-row">
+    <span>Subtotal</span>
+    <strong>${{ subtotal().toFixed(2) }}</strong>
+  </div>
+  <div class="row">
+    <span>Tax ({{ taxRate() * 100 }}%)</span>
+    <strong>${{ tax().toFixed(2) }}</strong>
+  </div>
+  <div class="row total-row grand">
+    <span>Total</span>
+    <strong>${{ total().toFixed(2) }}</strong>
+  </div>
+</div>
+
+<section class="log-panel">
+  <h2>effect() log</h2>
+  <ul>
+    @for (line of effectLog(); track line) {
+      <li>{{ line }}</li>
+    }
+  </ul>
+</section>
+
+<section class="hint">
+  <strong>Interview:</strong> computed() is memoized and only recalculates when dependencies change.
+  Unlike observables, signals do not require subscription management in templates.
+</section>

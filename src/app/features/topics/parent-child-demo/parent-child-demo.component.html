@@ -1,0 +1,23 @@
+<a routerLink="/topics" class="back">← Topics</a>
+
+<header class="page-header">
+  <h1>Parent ↔ Child communication</h1>
+  <p>&#64;Input down, &#64;Output up, ViewChild for imperative child access</p>
+</header>
+
+<div class="controls">
+  <button type="button" (click)="increaseParentValue()">Increase &#64;Input to child</button>
+  <button type="button" (click)="resetViaViewChild()">Reset child via ViewChild</button>
+</div>
+
+<app-counter-child
+  [initialValue]="parentValue()"
+  (valueChange)="onChildChanged($event)"
+/>
+
+<p class="event-line">Last event: <strong>{{ lastEvent() }}</strong></p>
+
+<section class="hint">
+  <strong>Interview:</strong> Data flows down via property binding; events bubble up via EventEmitter.
+  ViewChild gives parent access to child public methods (use sparingly).
+</section>

@@ -1,0 +1,32 @@
+<header class="page-header">
+  <h1>Angular interview topics</h1>
+  <p>Hands-on demos with interview Q&amp;A hints in each page.</p>
+</header>
+
+<div class="topic-grid">
+  @for (t of topics; track t.path) {
+    <a [routerLink]="['/topics', t.path]" class="topic-card">
+      <h2>{{ t.title }}</h2>
+      <ul>
+        @for (c of t.concepts; track c) {
+          <li>{{ c }}</li>
+        }
+      </ul>
+      <span class="arrow">Open demo →</span>
+    </a>
+  }
+</div>
+
+<section class="qa-section">
+  <h2>Common interview questions covered</h2>
+  <dl>
+    <dt>What is the difference between BehaviorSubject and Subject?</dt>
+    <dd>BehaviorSubject stores the latest value; new subscribers get it immediately. See AuthService.</dd>
+    <dt>Signals vs Observables?</dt>
+    <dd>Signals are synchronous, fine-grained, integrated with change detection. Observables excel at async streams.</dd>
+    <dt>CanActivate vs CanMatch?</dt>
+    <dd>CanActivate runs before route activation; CanMatch decides if a route config matches at all.</dd>
+    <dt>Standalone vs NgModule?</dt>
+    <dd>This app uses standalone components (Angular 15+) — no feature NgModules required.</dd>
+  </dl>
+</section>

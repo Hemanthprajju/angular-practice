@@ -1,0 +1,33 @@
+<a routerLink="/topics" class="back">← Topics</a>
+
+<header class="page-header">
+  <h1>Lifecycle hooks</h1>
+  <p>Order: constructor → ngOnChanges → ngOnInit → ngDoCheck → ngAfterContentInit → ngAfterViewInit → ngOnDestroy</p>
+</header>
+
+<div class="controls">
+  <button type="button" (click)="increment()">Counter: {{ counter() }}</button>
+  <button type="button" (click)="toggleChild()">{{ showChild() ? 'Destroy' : 'Create' }} child</button>
+  <button type="button" (click)="updateMessage()">Change &#64;Input to child</button>
+</div>
+
+@if (showChild()) {
+  <app-lifecycle-logger
+    [message]="childMessage()"
+    [count]="counter()"
+    (logged)="onChildLog($event)"
+  />
+}
+
+<section class="log-panel">
+  <h2>Parent log</h2>
+  <ul>
+    @for (line of logs(); track line) {
+      <li>{{ line }}</li>
+    }
+  </ul>
+</section>
+
+<section class="hint">
+  <strong>Interview:</strong> ngOnInit runs once after first ngOnChanges. Use ngOnDestroy to unsubscribe and avoid memory leaks.
+</section>

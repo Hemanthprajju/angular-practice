@@ -1,0 +1,128 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 260px;
+  background: linear-gradient(180deg, #0f172a 0%, #1e293b 100%);
+  border-right: 1px solid #334155;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.brand {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+
+  h1 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+    color: #f8fafc;
+  }
+}
+
+.brand-icon {
+  font-size: 1.75rem;
+}
+
+.brand-sub {
+  margin: 0;
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.user-card {
+  padding: 0.75rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border: 1px solid #334155;
+}
+
+.user-name {
+  margin: 0;
+  font-weight: 600;
+  color: #e2e8f0;
+  font-size: 0.9rem;
+}
+
+.user-meta {
+  margin: 0.25rem 0 0.5rem;
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.role-pill {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.15rem 0.5rem;
+  border-radius: 999px;
+
+  &.role-admin {
+    background: #7c3aed33;
+    color: #c4b5fd;
+  }
+  &.role-user {
+    background: #0ea5e933;
+    color: #7dd3fc;
+  }
+  &.role-mechanic {
+    background: #f59e0b33;
+    color: #fcd34d;
+  }
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+
+  a {
+    padding: 0.6rem 0.85rem;
+    border-radius: 8px;
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: background 0.15s, color 0.15s;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.06);
+      color: #f1f5f9;
+    }
+
+    &.active {
+      background: #6366f1;
+      color: #fff;
+    }
+  }
+}
+
+.btn-logout {
+  margin-top: auto;
+  padding: 0.6rem;
+  border: 1px solid #475569;
+  background: transparent;
+  color: #94a3b8;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.85rem;
+
+  &:hover {
+    border-color: #ef4444;
+    color: #fca5a5;
+  }
+}
+
+.content {
+  flex: 1;
+  padding: 2rem;
+  background: #0b1120;
+  overflow-y: auto;
+}
