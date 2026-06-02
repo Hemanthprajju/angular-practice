@@ -1,11 +1,30 @@
 <div class="layout">
-  <aside class="sidebar">
-    <div class="brand">
-      <span class="brand-icon">📘</span>
-      <div>
-        <h1>Angular Practice</h1>
-        <p class="brand-sub">Interview prep lab</p>
+  @if (sidebarOpen()) {
+    <button
+      type="button"
+      class="sidebar-backdrop"
+      aria-label="Close menu"
+      (click)="closeSidebar()"
+    ></button>
+  }
+
+  <aside class="sidebar" [class.open]="sidebarOpen()">
+    <div class="sidebar-header">
+      <div class="brand">
+        <span class="brand-icon">📘</span>
+        <div>
+          <h1>Angular Practice</h1>
+          <p class="brand-sub">Interview prep lab</p>
+        </div>
       </div>
+      <button
+        type="button"
+        class="btn-close-sidebar"
+        aria-label="Close menu"
+        (click)="closeSidebar()"
+      >
+        ✕
+      </button>
     </div>
 
     @if (user(); as u) {
@@ -22,6 +41,7 @@
           [routerLink]="item.path"
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: item.path === '/dashboard' }"
+          (click)="closeSidebar()"
         >
           {{ item.label }}
         </a>
@@ -31,7 +51,22 @@
     <button type="button" class="btn-logout" (click)="logout()">Sign out</button>
   </aside>
 
-  <main class="content">
-    <router-outlet />
-  </main>
+  <div class="main-column">
+    <header class="mobile-header">
+      <button
+        type="button"
+        class="btn-menu"
+        [attr.aria-label]="sidebarOpen() ? 'Close menu' : 'Open menu'"
+        [attr.aria-expanded]="sidebarOpen()"
+        (click)="toggleSidebar()"
+      >
+        <span class="menu-icon" aria-hidden="true"></span>
+      </button>
+      <span class="mobile-title">Angular Practice</span>
+    </header>
+
+    <main class="content">
+      <router-outlet />
+    </main>
+  </div>
 </div>
