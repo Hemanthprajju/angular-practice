@@ -6,52 +6,43 @@
 </header>
 
 <div class="toolbar">
-  <input
-    type="search"
-    [formControl]="searchControl"
-    placeholder="Search vehicle or service…"
-  />
-
+  <input type="search" [formControl]="searchControl" placeholder="Search vehicle or service…" />
   <div class="filters">
     @for (f of ['all', 'scheduled', 'completed', 'cancelled']; track f) {
-      <button
-        type="button"
-        [class.active]="filterStatus() === f"
-        (click)="setFilter($any(f))"
-      >
-        {{ f }}
-      </button>
+    <button type="button" [class.active]="filterStatus() === f" (click)="setFilter($any(f))">
+      {{ f }}
+    </button>
     }
   </div>
 </div>
 
 @if (loading()) {
-  <p class="loading">Loading appointments…</p>
+<p class="loading">Loading appointments…</p>
 } @else {
-  <table class="appt-table">
-    <thead>
-      <tr>
-        <th>Vehicle</th>
-        <th>Service</th>
-        <th>Date</th>
-        <th>Status</th>
-        <th>Mechanic</th>
-      </tr>
-    </thead>
-    <tbody>
-      @for (a of filtered(); track a.id) {
-        <tr>
-          <td>{{ a.vehicle }}</td>
-          <td>{{ a.service }}</td>
-          <td>{{ a.date | date: 'medium' }}</td>
-          <td><span class="badge status-{{ a.status }}">{{ a.status }}</span></td>
-          <td>{{ a.mechanic ?? '—' }}</td>
-        </tr>
-      } @empty {
-        <tr>
-          <td colspan="5" class="empty">No appointments match your filters.</td>
-        </tr>
-      }
-    </tbody>
-  </table>
+<table class="appt-table">
+  <thead>
+    <tr>
+      <th>Vehicle</th>
+      <th>Service</th>
+      <th>Date</th>
+      <th>Status</th>
+      <th>Mechanic</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (a of filtered(); track a.id) {
+    <tr>
+      <td>{{ a.vehicle }}</td>
+      <td>{{ a.service }}</td>
+      <td>{{ a.date | date: 'medium' }}</td>
+      <td><span class="badge status-{{ a.status }}">{{ a.status }}</span></td>
+      <td>{{ a.mechanic ?? '—' }}</td>
+    </tr>
+    } @empty {
+    <tr>
+      <td colspan="5" class="empty">No appointments match your filters.</td>
+    </tr>
+    }
+  </tbody>
+</table>
 }
